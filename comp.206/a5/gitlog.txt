@@ -1,0 +1,17 @@
+commit 0af08ec79dd17dd2eea40496cbfed15fd9ee59de
+Author: ianbenlolo <ian.benlolo@gmail.com>
+Date:   Sun Nov 26 21:57:11 2017 -0500
+
+    everything fixed, works well just need to make pretty and comment
+
+commit 034e7151d206b5bab8cfbfc6d3421f9241eb547a
+Author: ianbenlolo <ian.benlolo@gmail.com>
+Date:   Fri Nov 24 20:41:46 2017 -0500
+
+    main not finished, list.h and .c looking good, think theyre done but still working on actually compiling them
+
+commit fa49d60dc7829c654530dfb0f90c588ec5b09180
+Author: ianbenlolo <ianbenlolo@Ians-MacBook-Air.local>
+Date:   Wed Nov 22 12:14:43 2017 -0500
+
+    main, list.h created but not sure, list.c in works but also not sure

@@ -1,0 +1,160 @@
+ls, pwd, cd, rm, rmdir(or rm -r), mkdir
+
+chat with people: “talk”,”write”_ username
+
+cat: Concatenate something onto another—> also prints
+wc :word count
+	-c: character count
+	-w: number of appearances
+
+echo: print stuff
+	-n: don’t do a carriage return 
+	-e: process an escape char like \n, \t,…
+
+chmod: change permissions
+	-u: you, g: group, o: others
+	r,w,x
+	=,+,-
+
+could also run programs by writing (w/o execute permission): bash script.txt
+
+sort: sorts all lines of txt file
+	-b ignore blanks
+	
+ps: show running processes
+
+read: waits for input
+
+grep: search for patterns in files—- grep ‘text1’ ’text2’ filename.txt
+	-i: ignore cases
+	-c numb of lines containing matches
+	-v display lines that do not match
+	-n display line number & the line
+	-r recursive 
+	-l list filenames but not the lines themselves
+tar: archive files
+	.tar: tar archive, .tgz: compressed (gzipped) tar archive
+	-c create new tar archive
+	-r update
+	-x extract
+	-v verbose mode
+	-f specify archive name
+	-z allows you to compress the file
+
+diff [options] file1 file2: shows differences bw the files
+
+if [ -? filename ]
+	-r: true if file exists and is readable
+	-w, x … writeable, executable
+	-f file: true if exists and is regular file
+	-d true if exists and is directory
+if($x)
+	-z true if string length is zero
+	-n true if string length non zero
+	-string1 = string2 / string1 != string2
+
+integer tests n1 XX n2
+	-eq, -ne, -gt, -ge, -lt(<), -le (<=)
+
+for i in ``
+do
+	__
+done
+
+
+^ : starts with
+^.e : starts with ‘?e’ 
+ 
+shift: shifts `set` by one to the left
+$@: whole input as array
+$*: everything as string
+$#: numb of inputs
+$?: asks if there was an error and returns its exit value
+$$: process number of the current process
+
+
+
+GO OVER VIM COMMANDS
+
+C
+
+#include <stdlib.h> <stdio.h> <ctype.h>(isalpha, isupper,) <unistd.h> (for fork) 
+	<string.h> (strstr, strtok, )
+
+files
+	- rewind(fp)
+
+	-remove/rename(fp) 
+
+	-fseek(FILE *stream, long offset, int whence): whence: SEEX_SET/CUR/END
+
+	-fgets(array, lim, stream) - at most lim num of characters from stream into array, adds \0 at the end, so limit needs to be one less than array
+
+
+int main(int argc, char* argv[])
+	putc()
+		Int putc(char, stream): put char into stream; can be stdout, file,…
+	puts(string) - puts string into stdout
+	getc(stdin) - gets a char from stdin
+	
+
+	sscanf(char_array, string, variables): parses char_array into variables
+	
+Files:
+	FILE* fp=fopen(file_name, “mode”)
+	fgetc(); fgets; fputc; fputs; 
+	fscanf(*string, “”, variables)
+stdlib.h
+	
+
+
+
+int x=setenv(“name”, “value”, 1) -> 
+int *x= getenv(“x”);->returns pointer 
+
+GIT
+
+1) git init   2) git add file1 file2   3) git commit -m “..”
+- to get last file(tip): git checkout -f
+- git log and get <sha>
+- git diff: will compare all tip files with current files
+- make a shared git: git init -bare — then share url with friends
+- to join existing proj: git clone <url>
+- branches: git branch
+		-d: to delete branch
+	Create branch: git branch <name>
+			git checkout <name> 
+	exit branch: git checkout master
+		merge: git merge <name>
+
+
+GDB
+	gcc -g main.c
+	gdb a.out
+	list main.c : prints main.c
+	run : run till crash or breakpoint
+	step (next line), next (skip next line, if its a function just run it don’t go in)
+	backtrace
+	where: where did it crash?
+	whatis x
+	print x
+	print fn(y)/call fn(y): execute fn with y as param
+	break LINE_NO, FUNC_NAME, LINE_NO if EXPR, 
+	continue
+	watch EXPR: stop the program as soon as EXPR is true
+	
+
+
+time.h
+	time_t begin, end;
+	begin=time(NULL);
+	…
+	difftime(end, begin); (long)
+
+1011 & 0110 -> 0010 
+1011 | 0110 -> 1111 
+~1011 -> 01001011>>3 -> 00011011<<2 ->  1100
+ex: if (b & 0001) //0 if the last bit was 0
+
+
+

@@ -1,0 +1,5 @@
+#!bin/bash
+
+gcc ass3.c
+./a.out
+

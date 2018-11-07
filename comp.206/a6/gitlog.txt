@@ -1,0 +1,23 @@
+commit aec49fe683448d958724e667cd82b40fbd1fad68
+Author: ianbenlolo <ian.benlolo@gmail.com>
+Date:   Wed Dec 6 18:13:30 2017 -0500
+
+    added partners consumer part, looks like it works
+
+commit e468bcf6f7d779d1212c10735ee825852347313c
+Author: ianbenlolo <ian.benlolo@gmail.com>
+Date:   Tue Dec 5 14:19:56 2017 -0500
+
+    wasn't properly working before, misread instructions but all fixed and works
+
+commit 8a39b6da2dd8ddb1e2969f374e805c19306c5d4f
+Author: ianbenlolo <ian.benlolo@gmail.com>
+Date:   Tue Dec 5 13:18:12 2017 -0500
+
+    producer works. added .h file for security
+
+commit 26b20b2d6c24fb8433338001c5834fc64385a197
+Author: ianbenlolo <ian.benlolo@gmail.com>
+Date:   Mon Dec 4 15:03:20 2017 -0500
+
+    producer almost done, couple of errors compiling but ill fix soon

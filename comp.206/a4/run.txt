@@ -1,0 +1,4 @@
+#!bin/bash
+
+gcc Replace.c
+./a.out 

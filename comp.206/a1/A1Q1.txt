@@ -1,0 +1,5 @@
+Ian Benlolo-260744397
+Sep 23rd 2017
+Ass1 Q1
+
+The purpose of the LDP to develop and distribute documentation regarding the linux OS. Many linux devices come with their own documentation but LDP fills in their gaps. They also make a collaboration of any issues the GNU/Linux documentation has which is crowdsourced from people around the world and all of this is freely distributed.
