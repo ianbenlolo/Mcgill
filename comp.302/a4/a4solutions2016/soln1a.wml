@@ -1,0 +1,86 @@
+{:material|cost|
+  {:getcost|{{{cost}}}:}
+  {:tostringflat| cost:{{getcost}} :}
+  {:tostring|{ {{tostringflat}} }:}
+  {:`|f|{{#ifeq|{{{f}}}|
+        getcost|{{getcost}}|
+        {{#ifeq|{{{f}}}|
+            tostring|{{tostring}}|
+            {{#ifeq|{{{f}}}|
+                tostringflat|{{tostringflat}}|
+                Method not found}}}}}}:}:}
+
+{:attachment|
+  {:tostringflat|:}
+  {:tostring|{ {{tostringflat}} }:}
+  {:`|f|{{#ifeq|{{{f}}}|
+            tostring|{{tostring}}|
+            {{#ifeq|{{{f}}}|
+                tostringflat|{{tostringflat}}|
+                Method not found}}}}:}:}
+
+{:metal|ferrous|
+  {{ {:`|super|
+        {:getferrous|{{{ferrous}}}:}
+        {:tostringflat| {{ {{{super}}}|tostringflat}}, ferrous:{{getferrous}} :}
+        {:tostring|{ {{tostringflat}} }:}
+        {:`|f|{{#ifeq|{{{f}}}|
+              getferrous|{{getferrous}}|
+              {{#ifeq|{{{f}}}|
+                  tostring|{{tostring}}|
+                  {{#ifeq|{{{f}}}|
+                      tostringflat|{{tostringflat}}|
+                      {{ {{{super}}}|{{{f}}}}}}}}}}}:}:}
+      |{{material|expensive}}}}:}
+
+{:plastic|chemical|
+  {{ {:`|super|
+        {:getchemical|{{{chemical}}}:}
+        {:tostringflat| {{ {{{super}}}|tostringflat}}, chemical:{{getchemical}} :}
+        {:tostring|{ {{tostringflat}} }:}
+        {:`|f|{{#ifeq|{{{f}}}|
+              getchemical|{{getchemical}}|
+              {{#ifeq|{{{f}}}|
+                  tostring|{{tostring}}|
+                  {{#ifeq|{{{f}}}|
+                      tostringflat|{{tostringflat}}|
+                      {{ {{{super}}}|{{{f}}}}}}}}}}}:}:}
+      |{{material|cheap}}}}:}
+
+{:holed|number|
+  {{ {:`|super|
+        {:getnumber|{{{number}}}:}
+        {:tostringflat| {{ {{{super}}}|tostringflat}}{{#if|{{ {{{super}}}|tostringflat}}|,|}} number:{{getnumber}} :}
+        {:tostring|{ {{tostringflat}} }:}
+        {:`|f|{{#ifeq|{{{f}}}|
+              getnumber|{{getnumber}}|
+              {{#ifeq|{{{f}}}|
+                  tostring|{{tostring}}|
+                  {{#ifeq|{{{f}}}|
+                      tostringflat|{{tostringflat}}|
+                      {{ {{{super}}}|{{{f}}}}}}}}}}}:}:}
+      |{{attachment}}}}:}
+
+{:shank|self-shank|
+  {{ {:`|super|
+        {:getself-shank|{{{self-shank}}}:}
+        {:tostringflat| {{ {{{super}}}|tostringflat}}{{#if|{{ {{{super}}}|tostringflat}}|,|}} self-shank:{{getself-shank}} :}
+        {:tostring|{ {{tostringflat}} }:}
+        {:`|f|{{#ifeq|{{{f}}}|
+              getself-shank|{{getself-shank}}|
+              {{#ifeq|{{{f}}}|
+                  tostring|{{tostring}}|
+                  {{#ifeq|{{{f}}}|
+                      tostringflat|{{tostringflat}}|
+                      {{ {{{super}}}|{{{f}}}}}}}}}}}:}:}
+      |{{attachment}}}}:}
+
+{:test|m|a|e|p|h|s|
+A material has cost="{{ {{{m}}}|getcost}}" has a string form of "{{ {{{m}}}|tostring}}".<br>
+An attachment has a string form of "{{ {{{a}}}|tostring}}".<br>
+A metal has ferrous="{{ {{{e}}}|getferrous}}", a cost="{{ {{{e}}}|getcost}}", and a string form of {{ {{{e}}}|tostring}}.<br>
+A plastic has chemical="{{ {{{p}}}|getchemical}}", a cost="{{ {{{p}}}|getcost}}", and a string form of {{ {{{p}}}|tostring}}.<br>
+A holed has number="{{ {{{h}}}|getnumber}}" and a string form of {{ {{{h}}}|tostring}}.<br>
+A shank has self-shank="{{ {{{s}}}|getself-shank}}" and a string form of {{ {{{s}}}|tostring}}.<br>
+:}
+{{test|{{material|free!}}|{{attachment}}|{{metal|very much so}}|{{plastic|polysomethingorother}}|{{holed|1e17}}|{{shank|truly}}}}

@@ -1,0 +1,76 @@
+scala solution3.scala -s "{'pair|x|y||{'f|arg||{{ {{{arg}}}|{{{x}}}|{{{y}}}}}'}'}
+{'head|argu||{'retHead|a|b||{{{a}}}'}{{ {{{argu}}}|{{{retHead}}} }}'}
+{'tail|argu||{'retTail|a|b||{{{b}}}'}{{ {{{argu}}}|{{{retTail}}} }}'}
+{'var|v||{{pair|var|{{{v}}} }}'}
+{'vname|p||{{tail|{{{p}}}}}'}
+{'app|M|N||{{pair|app|{{pair|{{{M}}}|{{{N}}}}}}}'}
+{'app1|p||{{head|{{tail|{{{p}}} }} }}'}
+{'app2|p||{{tail|{{tail|{{{p}}} }} }}'}
+{'abs|x|M||{{pair|abs|{{pair|{{{x}}}|{{{M}}}}}}}'}
+{'param|abs||{{head|{{tail|{{{abs}}}}}}}'}
+{'body|abs||{{tail|{{tail|{{{abs}}} }} }}'}
+{'pprint|v||{{#ifeq|{{head|{{{v}}}}}|abs|(λ {{param|{{{v}}}}}.({{pprint|{{body|{{{v}}}}}}} ))|{{#ifeq|{{head|{{{v}}}}}|var|{{vname|{{{v}}}}}|{{#ifeq|{{head|{{{v}}}}}|app|{{pprint|{{app1|{{{v}}}}}}}{{pprint|{{app2|{{{v}}}}}}}}} }}}}'}
+{'substitute|v|M|N||
+{{#ifeq|{{head|{{{M}}}}}|var|
+{{#ifeq|{{vname|{{{v}}}}}|{{vname|{{{M}}}}}|{{{N}}}|{{{M}}}}}|
+{{#ifeq|{{head|{{{M}}}}}|app|{{app|{{substitute|{{{v}}}|{{app1|{{{M}}}}}|{{{N}}}}}|{{substitute|{{{v}}}|{{app2|{{{M}}}}}|{{{N}}}}}}}|
+{{#ifeq|{{head|{{{M}}}}}|abs|
+{{#ifeq|{{param|{{{M}}}}}|{{vname|{{{v}}}}}|{{{M}}}|
+{{abs|{{param|{{{M}}}}}|{{substitute|{{{v}}}|{{body|{{{M}}}}}|{{{N}}}}}}}}}}}}}}}'}
+{{pprint|{{substitute|{{var|y}}|{{abs|x|{{var|y}}}}|{{var|z}}}}}}
+
+
+{'print|input||(λ{{param|{{{input}}} }}.({{vname|{{app1|{{body|{{{input}}} }} }} }}{{vname|{{app2|{{body|{{{input}}}}}}}}}))'}
+
+
+{{abs|{{param|{{{v}}}}}|{{substitute|{{body|{{{v}}}}}}}}}
+
+{'hello|x||{{#ifeq|{{head|{{{x}}}}}|var|hello|bye}}'}
+{{hello|{{var|y}}}}
+
+
+
+
+
+{'substitute|v|M|N||{{#ifeq|{{head|{{{M}}}}}|var|VAR{{#ifeq|{{vname|{{{M}}}}}|{{vname|{{{v}}}}}|{{{N}}}|{{{M}}}}}|{{#ifeq|{{head|{{{M}}}}}|app|APP{{app|{{substitute|{{{v}}}|{{app1|{{{M}}}}}|{{{N}}}}}|{{substitute|{{{v}}}|{{app2|{{{M}}}}}|{{{N}}}}}}}|{{#ifeq|{{head|{{{M}}}}}|abs|{{#ifeq|{{param|{{{M}}}}}|{{vname|{{{v}}}}}|{{{M}}}|{{abs|{{param|{{{M}}}}}|{{substitute|{{{v}}}|{{body|{{{M}}} }}|{{{N}}}}}}} }}}}}}}}}}'}
+
+
+
+
+Testing base case of substitute: x[x->y] = {{pprint|{{substitute|{{var|x}}|{{var|x}}|{{var|y}}}}}} = y
+
+x[y->z] = {{pprint|{{substitute|{{var|y}}|{{var|x}}|{{var|z}}}}}} = x
+
+Testing app case of substitute: (x y)[x->z] = {{pprint|{{substitute|{{var|x}}|{{app|{{var|x}}|{{var|y}}}}|{{var|z}}}}}} = (z y)
+
+Testing abs case of substitute: (λ x.y)[y->z] = {{pprint|{{substitute|{{var|y}}|{{abs|x|{{var|y}}}}|{{var|z}}}}}} = (λ x.z)
+
+(λ x.y)[x->z] = {{pprint|{{substitute|{{var|x}}|{{abs|x|{{var|y}}}}|{{var|z}}}}}} = (λ x.y)
+
+(λ x.y)[y->(x(λ x.y))] = {{pprint|{{substitute|{{var|y}}|{{abs|x|{{var|y}}}}|{{app|{{var|x}}|{{abs|{{var|x}}|{{var|y}}}}}}}}}} = (λ x.(x (λ x.y)))
+
+(λ x.y)[y->(x y)] = {{pprint|{{substitute|{{var|y}}|{{abs|x|{{var|y}}}}|{{app|{{var|x}}|{{var|y}}}}}}}} = (λ x.(x y))
+
+(λ x.(x y))[y->z] = {{pprint|{{substitute|{{var|y}}|{{abs|x|{{app|{{var|x}}|{{var|y}}}}}}|{{var|z}}}}}} = (λ x.(x z))
+
+(λ x.(x y))[x->z] = {{pprint|{{substitute|{{var|x}}|{{abs|x|{{app|{{var|x}}|{{var|y}}}}}}|{{var|z}}}}}} = (λ x.(x y))
+
+
+
+
+{{pprint|{{var|w}}}}
+
+{{#ifeq|{{param|{{{M}}}}}|{{{v}}}|{{pprint|{{{M}}}}}|{{substitute|{{body|{{{M}}}}}|{{{v}}}|{{{N}}}}}|}}
+
+{{substitute|{{var|y}}|x|{{var|w}} }}
+
+
+{{pprint|{{app|{{abs|x|{{app|{{var|x}}|{{var|y}}}}}}|{{var|N}}}}}}
+{{pprint|{{abs|x|{{app|{{var|x}}|{{var|y}}}}}}}}
+{{pprint|{{abs|x|{{app|{{var|x}}|{{var|y}}}} }} }}
+{{ vname|{{var|x}} }}
+{{ head|{{pair|A|B}} }}
+{{ tail|{{pair|A|B}} }}
+{{head|{{pair|hello|bye}}}}
+{{head|{{tail|{{pair|A|{{pair|C|D}}}}}}}}
+{{vname|{{app2|{{app|"hello"|{{pair|x|y}}}}}}}}

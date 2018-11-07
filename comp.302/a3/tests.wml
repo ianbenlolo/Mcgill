@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>WML in Scala</title>
+<meta name="author" content="clump" >
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
+</head>
+<body>
+<h1>Evaluated text &#8658 <font color="green">Expected text</font></h1>
+<ol>
+
+<li> 
+<div>{'foo|x||{'bar|y||{{{y}}}'}{{{x}}} and {{bar|there}}'}{{foo|here}}</div>
+<font color="green">here and there</font><br /></li>
+
+<li>
+<div>{'indirect||actual'}{'actual||hello'}{{ {{indirect}}}}</div>
+<font color="green">hello</font><br /></li>
+
+<li>
+<div>{'outer|x||{'inner|x||Inner={{{x}}}'}Outer={{{x}}} {{inner|inner}}'}{{outer|outer}}</div>
+<font color="green">Outer=outer Inner=inner</font></li>
+
+<li>
+<div>{'scope||static'}{'showscope||You have {{scope}} scoping.'}{'dyntest||{'scope||dynamic'}{{showscope}}'}{{dyntest}}</div>
+<font color="green">You have static scoping.</font></li>
+
+<li>
+<div>{'wrap|x||{'||{{{x}}}'}'}
+{{ {{ {{wrap|{'||Hello'}}}}}}}</div>
+<font color="green">Hello</font></li>
+
+<li>
+<div>{{ {{ {{ {{wrap|{{wrap|{'||Hello again'}}}}}}}}}}}</div>
+<font color="green">Hello again</font></li>
+
+<li>
+<div>{'holder1|x||{'holder2||{{{x}}}'}{'||{{holder2}}'}'}
+{'holder2||Boo!'}
+{'v1||{{holder1|A pumpkin}}'}
+{'v2||{'||{{holder1|squash}}'}'}
+{{ {{v1}}}} is a {{ {{ {{v2}}}}}}</div>
+<font color="green">A pumpkin is a squash</font></li>
+
+<li>
+<div>{'iftest|x||{{#if|{{{x}}}|A|B}}'}{{iftest|one}}</div>
+<font color="green">A</font></li>
+
+<li>
+<div>{'iftest2|x||{{#if|{{{x}}}|A|B}}'}{{iftest2|}}</div>
+<font color="green">B</font></li>
+
+<li>
+<div>{'iftest3| x||{{#if|  {{{x}}} |A|B}}'}{{ iftest3 | one}}</div>
+<font color="green">A</font></li>
+
+<li>
+<div>{'exprtest|x||{{#expr|({{{x}}})*8}}'}{{exprtest|6}}</div>
+<font color="green">48</font></li>
+
+<li>
+<div>{'exprtest2|x||{{#expr|({{{x}}})<0}}'}{{exprtest2|1}}</div>
+<font color="green">false</font></li>
+
+<li>
+<div>{{exprtest2|-1}}</div>
+<font color="green">true</font></li>
+
+<li>
+<div>{'count|start|stop||{{#ifeq|{{#expr|({{{start}}})<=({{{stop}}})}}|true|{{{start}}} {{count|{{#expr|({{{start}}})+1}}|{{{stop}}}}}}}'}{{count|1|10}}</div>
+<font color="green">1 2 3 4 5 6 7 8 9 10</font></li>
+
+<li>
+<div>{'abs|x||{{#ifeq|{{#expr|({{{x}}})<0}}|true|{{#expr|-({{{x}}})}}|{{{x}}}}}'}
+{{abs|4}}, {{abs|-4}}</div>
+<font color="green">4, 4</font></li>
+
+<li>
+<div>Average of 5 and 10 is {'average|a|b||{{#expr|(({{{a}}})+({{{b}}}))/2}}'}{{average|5|10}} (using integers)</div>
+<font color="green">Average of 5 and 10 is  7  (using integers)</font></li>
+
+<li>
+<div>Average of 5 and 10 is {'average|a|b||{{#expr|(({{{a}}})+({{{b}}}))/2.0}}'}{{average|5|10}}</div>
+<font color="green">Average of 5 and 10 is  7.5</font></li>
+
+<li>
+<div>{'times|x|y||{{#expr|({{{x}}})*({{{y}}})}}'}
+{'square|x||{{times|{{{x}}}|{{{x}}}}}'}
+{'improve|guess|z||{{average|{{{guess}}}|{{#expr|({{{z}}})/({{{guess}}})}}}}'}
+{'average|a|b||{{#expr|(({{{a}}})+({{{b}}}))/2}}'}
+{'good-enough?|guess|x||{{#expr|({{abs|{{#expr|({{square|{{{guess}}}}})-({{{x}}})}}}})<(0.001)}}'}
+{'sqrt-iter|guess|x||{{#ifeq|{{good-enough?|{{{guess}}}|{{{x}}}}}|true|{{{guess}}}|{{sqrt-iter|{{improve|{{{guess}}}|{{{x}}}}}|{{{x}}}}}}}'}
+{'sqrt|num||{{sqrt-iter|1|{{{num}}}}}'}
+Sqrt of 68 is {{sqrt|68.0}} (more or less; some variation possible)</div>
+<font color="green">Sqrt of 68 is 8.246214022665885 (more or less; some variation possible)</font></li>
+
+</body>
+</html>

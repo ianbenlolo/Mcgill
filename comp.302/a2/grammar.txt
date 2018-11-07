@@ -1,0 +1,29 @@
+TSTART = "{{"
+TEND = "}}"
+VSTART = "{{{"
+VEND = "}}}"
+DSTART = "{'"
+DEND = "'}"
+PIPE = "|"
+PIPES = "||"
+
+OUTERTEXT = anything, except for TSTART, or DSTART
+INNERITEXT = anything, except for TSTART, DSTART, VSTART, PIPE(s), TEND
+INNERDTEXT = anything, except for TSTART, DSTART, VSTART, PIPE(s), DEND
+BODYTEXT = anything, except TSTART, DSTART, VSTART, DEND
+VNAME = anything, except for PIPE(s), VEND
+
+<program> ::= (OUTERTEXT | <invoke> | <define>)*
+<invoke> ::= TSTART <itext> <targs> TEND
+<targs> ::= (PIPE <itext>?)*
+<itext> ::= (INNERITEXT | <tvar> | <invoke> | <define> )* 
+
+<tvar> ::= VSTART VNAME (PIPE <itext>)? VEND 
+
+<define> ::= DSTART <dtextn> <dparams> PIPES <dtextb> DEND
+<dtextn> ::= (INNERDTEXT | <invoke> | <define> | <tvar>)*
+<dparams> ::= (PIPE <dtextp>)*
+<dtextp> ::= (INNERDTEXT | <invoke> | <define> | <tvar>)+
+<dtextb> ::= (BODYTEXT | <invoke> | <define> | <tvar>)*
+
+

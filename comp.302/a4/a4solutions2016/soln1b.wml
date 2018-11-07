@@ -1,0 +1,24 @@
+{:button|mat|attach|ligne number|a1|a2|
+  {{ {:`|super1|super2|
+        {:getligne number|{{{ligne number}}}:}
+        {:tostringflat| material:{{{mat}}}, attachment:{{{attach}}}, {{ {{{super1}}}|tostringflat}}, {{ {{{super2}}}|tostringflat}},  ligne number:{{getligne number}} :}
+        {:tostring|{ {{tostringflat}} }:}
+        {:gettype|{{{mat}}}:}
+        {:`|f|{{#ifeq|{{{f}}}|
+              getligne number|{{getligne number}}|
+              {{#ifeq|{{{f}}}|
+                  tostring|{{tostring}}|
+                  {{#ifeq|{{{f}}}|
+                      tostringflat|{{tostringflat}}|
+                      {{#ifeq|{{{f}}}|
+                        gettype|{{gettype}}|
+                        {{#ifeq|{{ {{{super1}}}|{{{f}}}}}|Method not found|{{ {{{super2}}}|{{{f}}}}}|{{ {{{super1}}}|{{{f}}}}}}}}}}}}}}}:}:}
+      |{{ {{{mat}}}|{{{a1}}}}}|{{ {{{attach}}}|{{{a2}}}}}}}:}
+
+
+{:btest|b1|b2|
+  Button 1 has a ligne number of {{ {{{b1}}}|getligne number}}, and a string form of {{ {{{b1}}}|tostring}}.<br>
+  Button 2 has a ligne number of {{ {{{b2}}}|getligne number}}, and a string form of {{ {{{b2}}}|tostring}}.<br>
+:}
+{{btest|{{button|metal|shank|33|not in the slightest|oh yes}}
+       |{{button|plastic|holed|66|polycheese|4 (but they're very tiny)}}}}

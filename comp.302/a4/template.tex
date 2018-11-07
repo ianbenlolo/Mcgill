@@ -1,0 +1,31 @@
+\input{header.tex}
+\usepackage{cancel}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{appendix}
+\title{Comp 302 - Assignment 4}
+\author{Ian Benlolo 260744397\\McGill University \\}
+\begin{document}
+\maketitle
+\begin{enumerate}[(a)]
+\item $R_{b:T}\frac{}{\text{true:boolean}}\ ,\ R_{b:F}\frac{}{\text{false:boolean}}\ ,\  R_{\bullet}\frac{}{\bullet : \tau}\ ,\ R_{==}\frac{\text{n:Int\ \ m:Int}}{\text{n==m\ :\ boolean}}$\\
+
+% \vdash 
+% \Gamma
+
+\item
+Since the whole proof would be long to write, I'm going to cut it short and use $\cdots$ to represent the following recursive "let" reductions.\\
+$$R_{\text{let}}   \frac{\cdot \vdash  \&y: \bullet \ \ \ \ x :  \textbf{!}\bullet }{\cdot \vdash \text{let}\  x\ =\ \&y in \cdots } $$ \\
+
+Let 
+$\Gamma_1 = \{ x: \textbf{!}\bullet, y: \bullet \}$
+$$ R_{\cdots}\frac{\Gamma_1\ \vdash\ \&x:\textbf{!}\bullet\ \ \ \ \Gamma_1\vdash\ z\ =\ \&x:\textbf{!!}\bullet }{\Gamma_1 \vdash \text{let}\ z = \&x\ \text{in}\ (\cdots)_2 } $$
+Let $\Gamma_2\ =\ \{\Gamma_1, z:\textbf{!!}\bullet \} $\\
+$$ R_{(\cdots)_2}\frac{ \Gamma_3\vdash *z:\textbf{!}\bullet\ \ \ \ \Gamma_3\vdash w\ =\ *z:\textbf{!}\bullet }{\Gamma_3\vdash\ \text{let}\ w=*z\ \text{in}\ (\cdots)_3} $$\\
+Let $\Gamma_4\ =\ \{ \Gamma_2, w:\textbf{!}\bullet \} $.
+Using $R_{==}$,
+$$R_{(\cdots)_3}\frac{w:\textbf{!}\bullet,\ x: \textbf{!}\bullet\vdash w==x:\text{Boolean}\ \ \ \ \  }{\Gamma_4\vdash\ \text{if}(w==x)\ \text{then let}\ r =*\&y\ \text{in r else let r=**z; in r} }$$
+
+
+\end{enumerate}
+\end{document}

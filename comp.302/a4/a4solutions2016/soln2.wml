@@ -1,0 +1,19 @@
+{:buttoncollection|buttons|title|filter|
+  {:showbutton|b|<tr><td>{{ {{{b}}}|tostring }}</td></tr>:}
+  {:ok|b|filter|{{#ifeq|{{{filter}}}|
+                        metal|{{#ifeq|{{ {{{b}}}|gettype}}|metal|1|}}|
+                        {{#ifeq|{{{filter}}}|
+                                plastic|{{#ifeq|{{ {{{b}}}|gettype}}|plastic|1}}|1}}}}:}
+  {:emit|buttons|filter|
+    {{#ifeq|{{{buttons}}}|null||
+       {{#if|{{ok|{{car|{{{buttons}}}}}}}|
+       {{showbutton|{{car|{{{buttons}}}}}}}}}{{emit|{{cdr|{{{buttons}}}}}|{{{filter}}}}}}}:}
+<table><tr><th>{{{title}}}</th></tr>{{emit|{{{buttons}}}|{{{filter}}}}}</table>
+:}
+
+{{buttoncollection|{{cons|{{button|metal|shank|33|not in the slightest|oh yes}}|{{cons|{{button|plastic|holed|66|polycheese|4 (but they're very tiny)}}|null}}}}|My Favourite Buttons}}
+
+{{buttoncollection|{{cons|{{button|metal|shank|33|not in the slightest|oh yes}}|{{cons|{{button|plastic|holed|66|polycheese|4 (but they're very tiny)}}|null}}}}|My Favourite Buttons|metal}}
+
+{{buttoncollection|{{cons|{{button|metal|shank|33|not in the slightest|oh yes}}|{{cons|{{button|plastic|holed|66|polycheese|4 (but they're very tiny)}}|null}}}}|My Favourite Buttons|plastic}}
+

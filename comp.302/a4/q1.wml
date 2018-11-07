@@ -1,0 +1,56 @@
+<!-- Ian Benlolo 260744397 -->
+Pair,head,tail:
+{'pair|x|y||
+{'f|arg||{{ {{{arg}}}|{{{x}}}|{{{y}}}}}'}'}
+
+{'head|argu||
+{'retHead|a|b||{{{a}}}'}{{ {{{argu}}}|{{{retHead}}} }}'}
+
+{'tail|argu||
+{'retTail|a|b||{{{b}}}'}{{ {{{argu}}}|{{{retTail}}} }}'}
+
+
+Var,Vname:
+{'var|v||
+{{pair|var|{{{v}}} }}'}
+
+{'vname|p||
+{{tail|{{{p}}}}}'}
+
+
+App, app1, app2:
+{'app|M|N||
+{{pair|app|{{pair|{{{M}}}|{{{N}}}}}}}'}
+
+{'app1|p||
+{{head|{{tail|{{{p}}} }} }}'}
+
+{'app2|p||
+{{tail|{{tail|{{{p}}} }} }}'}
+
+
+Abs, param, body:
+{'abs|x|M||
+{{pair|abs|{{pair|{{{x}}}|{{{M}}}}}}}'}
+
+{'param|abs||
+{{head|{{tail|{{{abs}}} }} }}'}
+
+{'body|abs||
+{{tail|{{tail|{{{abs}}} }} }}'}
+
+
+Pprint:
+{'pprint|v||
+{{#ifeq|{{head|{{{v}}}}}|abs|(λ{{param|{{{v}}}}}.({{pprint|{{body|{{{v}}}}}}}))|
+{{#ifeq|{{head|{{{v}}}}}|var|{{vname|{{{v}}}}}|
+{{#ifeq|{{head|{{{v}}}}}|app|{{pprint|{{app1|{{{v}}}}}}}{{pprint|{{app2|{{{v}}}}}}}|error}}}}}}'}
+
+
+Substitute:
+{'substitute|v|M|N||
+{{#ifeq|{{head|{{{M}}}}}|var|
+{{#ifeq|{{vname|{{{v}}}}}|{{vname|{{{M}}}}}|{{{N}}}|{{{M}}}}}|
+{{#ifeq|{{head|{{{M}}}}}|app|{{app|{{substitute|{{{v}}}|{{app1|{{{M}}}}}|{{{N}}}}}|{{substitute|{{{v}}}|{{app2|{{{M}}}}}|{{{N}}}}}}}|
+{{#ifeq|{{head|{{{M}}}}}|abs|
+{{#ifeq|{{param|{{{M}}}}}|{{vname|{{{v}}}}}|{{{M}}}|{{abs|{{param|{{{M}}}}}|{{substitute|{{{v}}}|{{body|{{{M}}}}}|{{{N}}}}}}}}}}}}}}}'}

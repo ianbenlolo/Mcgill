@@ -1,0 +1,5 @@
+{:cons|a|b|{:`|selector|{{ {{{selector}}}|{{{a}}}|{{{b}}}}}:}:}
+
+{:car|list|{{ {{{list}}}|{:`|x|y|{{{x}}}:}}}:}
+
+{:cdr|list|{{ {{{list}}}|{:`|x|y|{{{y}}}:}}}:}
