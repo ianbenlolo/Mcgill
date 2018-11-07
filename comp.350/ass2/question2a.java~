@@ -1,0 +1,8 @@
+public class question2a{
+  public static void main(String[] args){
+    int n=args[0];
+    if(n<=-1) System.out.println("n must be greater than -1"); Exit;
+    
+    
+  }
+}

@@ -1,0 +1,16 @@
+import java.math.*;
+public class q2a{
+  public static void main(String[] args){
+    int n=Integer.parseInt(args[0]);
+    if(n<=-1) System.out.println("n must be greater than -1");
+    else System.out.println(formula(n));
+  }
+  public static double formula(int n){
+    if(n==0) return 1;
+    else
+    {
+      double x=formula(n-1);
+      return (2^n)*(Math.sqrt(1+(2^-n)*n)-1);
+    }
+  }
+}

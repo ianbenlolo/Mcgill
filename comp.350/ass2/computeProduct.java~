@@ -1,0 +1,48 @@
+import java.util.*;
+
+public class computeProduct{
+  public static void main(String[] args){
+   int count=args.length;
+   int k=0;
+   float finl=1;
+   
+   for (int i=0; i<count-1; i+=2){ //iterate through every inputted number
+     float x= Float.parseFloat(args[i]); float y=Float.parseFloat(args[i+1]); 
+     float temp;
+     
+     while (doesOverflow(x,y)){
+       k++;
+       if(x >= Float.MIN_VALUE*10) x/=10; //to account for underflowing of x
+       else y/=10; //wouldnt be possible because its overflowing
+     }
+     while(doesUnderflow(x,y)){
+       k--;
+       if(x <= Float.MAX_VALUE/10) x*=10;
+       else y*=10;
+     }
+     temp=x*y; //this does not overflow or underflow
+     if(doesOverflow(temp, finl) || doesUnderflow(temp, finl)){
+       while(doesOverflow(temp, finl)){
+         k++;
+         if(temp>=Float.MIN_VALUE*10) temp/=10;
+         else finl/=10;
+         }
+       while (doesUnderflow(temp, finl)){
+         k--;
+         if(temp<=Float.MAX_VALUE/10) temp*=10;
+         else finl*=10;
+         }
+       }
+     finl*=temp;
+     }
+   System.out.println(""+finl+"e"+k);
+  }
+  public static boolean doesOverflow(float x, float y){
+    if (x*y >= Float.MAX_VALUE) return true;
+    else return false;
+  }
+  public static boolean doesUnderflow(float x, float y){
+    if (x*y<=Float.MIN_VALUE)return true;
+    else return false;
+  }
+}

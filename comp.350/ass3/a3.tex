@@ -1,0 +1,365 @@
+\input{header.tex}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{pdfpages}
+\usepackage{appendix}
+\usepackage{enumerate}
+\title{Comp 350 Assignment 3: Solving linear systems}
+\author{Ian Benlolo 260744397\\McGill University \\}
+\begin{document}
+\maketitle
+
+\begin{enumerate}[1)]
+\item \begin{enumerate}[(a)]
+	\item
+\[
+\begin{bmatrix}
+-6 & -4 & 46 & 32 & \vline &-6 \\
+12 & 24 & -12 & -24 & \vline & 0\\
+6 & 36 & 6 & 12 & \vline & 18\\
+6 & 4 & -1 & 31 & \vline & 15\\
+\end{bmatrix}
+\xrightarrow[]{P_1 }
+\begin{bmatrix}
+12 & 24 & -12 & -24 & \vline & 0\\
+-6 & -4 & 46 & 32 & \vline &-6 \\
+6 & 36 & 6 & 12 & \vline & 18\\
+6 & 4 & -1 & 31 & \vline & 15\\
+\end{bmatrix}
+\xrightarrow[R_3 \& R_4 -\frac{1}{2}R_1]{R_2+\frac{1}{2}R_1 }
+\begin{bmatrix}
+12 & 24 & -12 & -24 & \vline & 0\\
+0 & 8 & 40 & 20 & \vline & -6\\ 
+0 & 24 & 12 & 24 & \vline & 18\\
+0 & -8 & 5 & 43 & \vline & 15\\
+\end{bmatrix}
+\]
+\[
+\xrightarrow[]{P_2}
+\begin{bmatrix}
+12 & 24 & -12 & -24 & \vline & 0\\
+0 & 24 & 12 & 24 & \vline & 18\\
+0 & 8 & 40 & 20 & \vline & -6\\ 
+0 & -8 & 5 & 43 & \vline & 15\\
+\end{bmatrix}
+\xrightarrow[R_3 - \frac{1}{3}R_2]{ R_4 +  \frac{1}{3}R_2}
+\begin{bmatrix}
+12 & 24 & -12 & -24 & \vline & 0\\
+0 & 24 & 12 & 24 & \vline & 18\\
+0 & 0 & 36 & 12 & \vline & -12\\
+0 & 0 & 9 & 51 & \vline & 21\\
+\end{bmatrix}
+\xrightarrow[R_4-\frac{1}{4}R_3]{}
+\]
+\[
+\begin{bmatrix}
+12 & 24 & -12 & -24 & \vline & 0\\
+0 & 24 & 12 & 24 & \vline & 18\\
+0 & 0 & 36 & 12 & \vline & -12\\
+0 & 0 & 0 & 48 & \vline & 24 \\
+\end{bmatrix}
+\]
+Where, 
+\[
+P_1
+=
+\begin{bmatrix}
+0 & 1 & 0& 0\\
+1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\\
+\end{bmatrix}
+, P_2=
+\begin{bmatrix}
+1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 1 & 0& 0\\
+0 & 0 & 0 & 1\\
+\end{bmatrix}
+\]
+Now, using back substitution we find that $$ x_4=\frac{1}{2}, x_3=\frac{-1}{2},  x_2=\frac{1}{2}, x_1=\frac{-1}{2}$$
+	\item 
+	\[
+	L=
+	\begin{bmatrix}
+	1 & 0 & 0 & 0\\
+	\frac{1}{2} & 1 & 0 & 0\\
+	\frac{-1}{2} & \frac{1}{3} & 1 & 0\\
+	\frac{1}{2} & \frac{-1}{3} & \frac{1}{4}& 1\\
+ 	\end{bmatrix}
+	, U=\begin{bmatrix}
+12 & 24 & -12 & -24  \\
+0 & 24 & 12 & 24 \\
+0 & 0 & 36 & 12 \\
+0 & 0 & 0 & 48  \\
+\end{bmatrix}
+\]
+\[
+PA=LU=
+	\begin{bmatrix}
+	1 & 0 & 0& 0\\
+0 & 0 & 1 & 0\\
+0 &1 & 0 & 0\\
+0 & 0 & 0 & 1\\
+	\end{bmatrix}
+	\begin{bmatrix}
+	0 & 1 & 0& 0\\
+1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\\
+	\end{bmatrix}
+	\times A
+	=
+	\begin{bmatrix}
+	1 & 0 & 0 & 0\\
+	\frac{1}{2} & 1 & 0 & 0\\
+	\frac{-1}{2} & \frac{1}{3} & 1 & 0\\
+	\frac{1}{2} & \frac{1}{3} & \frac{1}{4}& 1\\
+ 	\end{bmatrix}
+	\begin{bmatrix}
+12 & 24 & -12 & -24  \\
+0 & 24 & 12 & 24 \\
+0 & 0 & 36 & 12 \\
+0 & 0 & 0 & 48  \\
+\end{bmatrix}
+	\]
+	\[
+	A=
+	\begin{bmatrix}
+	0 & 1 & 0 & 0 \\
+	1 & 0 & 0 & 0  \\
+	0 & 0 & 1 & 0\\
+	0 & 0 & 0 & 1\\
+ 	\end{bmatrix}
+	\begin{bmatrix}
+	1 & 0 & 0 & 0  \\
+	0 & 0 & 1 & 0\\
+	0 & 1 & 0 & 0 \\
+	0 & 0 & 0 & 1\\
+ 	\end{bmatrix}
+	\begin{bmatrix}
+	1 & 0 & 0 & 0\\
+	\frac{1}{2} & 1 & 0 & 0\\
+	\frac{-1}{2} & \frac{1}{3} & 1 & 0\\
+	\frac{1}{2} & \frac{1}{3} & \frac{1}{4}& 1\\
+ 	\end{bmatrix}
+	\begin{bmatrix}
+12 & 24 & -12 & -24  \\
+0 & 24 & 12 & 24 \\
+0 & 0 & 36 & 12 \\
+0 & 0 & 0 & 48  \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+-6 & -4 & 46 & 32  \\
+12 & 24 & -12 & -24 \\
+6 & 36 & 6 & 12 \\
+6 & 4 & -1 & 31 \\
+\end{bmatrix}
+	\]
+	Which does in fact give the original matrix!
+	\end{enumerate}
+
+\item
+	\begin{enumerate}[(a)]
+	\item
+	\begin{verbatim}
+	function x =genp(A,b)
+% input (nonsingular) n by n matrix A and n by 1 matrix b
+%output solution to Ax=b
+%A is nxn so n^2 memory; b is nx1 for n memory
+
+n=length(b);
+midpoint = (n+1)/2 ; %2 flops, 1 memory
+
+for k=1:n-1 %1 memory
+    if k==midpoint % skip the middle point because we'd get a row of 0's if not, 1 flop
+        continue;
+    else
+        i=k+1:n; % 1 memory n-k-1 flops
+        A(i,k) =A(i,k)/A(k,k); % 1 flop
+        A(i,i)=A(i,i)-A(i,k)*A(k,i); % 2 flops
+        b(i)=b(i)-A(i,k)*b(k); % 2 flops
+    end
+end
+
+%back substitution
+x=zeros(n,1); % 1 flop, n memory
+x(n)=b(n)/A(n,n); % 1 flop
+for k=n-1:-1:1 
+    x(k)=(b(k)-A(k,k+1:n)*x(k+1:n))/A(k,k);  % 5 flops
+end
+
+end
+	\end{verbatim}
+ This all totals out to 
+ $1+1+\sum\limits_{i=1}^{n-1}(6+n-i-1)+1+1+\sum\limits_{i=1}^{n-1}(5)=\dots=\frac{n^2}{2}-\frac{7n}{2}-1$\\
+ Memory allocation: 
+ $n^2+n+n+2$
+
+	\begin{verbatim}
+function x = gepp(A,b)
+%input: A is an n x n nonsingular matrix
+%       b is an n x 1 vector
+% output: x is the solution of Ax=b
+%A is nxn so n^2 memory; b is nx1 for n memory
+n = length(b); %1 flop
+
+midpoint = (n+1)/2; % n is odd so this is a whole number, 2 flops
+for k = 1:n-1 % 1 memory
+    [maxval, maxindex] = max(abs(A(k:n,k))); % 2 flops, 2 memory
+    if maxval==0, error('A is singular'), end % 1 flop
+    
+    q = maxindex+k-1; % 2 flops
+    A([k,q],k:n) = A([q,k],k:n); 
+   
+    b([k,q]) = b([q,k]);
+    if k == midpoint % 1 flop
+        continue;
+    else
+        i = k+1:n; % n -k-1 flops
+        A(i,k) = A(i,k)/A(k,k); % 1 flop
+        A(i,i) = A(i,i) - A(i,k)*A(k,i); % 2 flops
+        b(i) = b(i) - A(i,k)*b(k); % 2 flops
+    end
+end
+x = zeros(n,1); %%backwards substitution, n memory
+x(n) = b(n)/A(n,n); % 1 flop
+for k = n-1:-1:1 % 1 memory
+    x(k) = (b(k) - A(k,k+1:n)*x(k+1:n))/A(k,k);% 4 flops
+end
+	\end{verbatim}
+Total flops:
+$1+2+1+\sum\limits_{i=1}^{n-1}(2+1+2+n-i-1+1+4)+n+1\sum\limits_{i=1}^{n-1}(4)=\dots=\frac{3n^2}{2}+\frac{23n}{2}-22$\\
+Total memory allocation: $n^2+n+n+2=n^2+2n+2$
+	Though my algorithms worked well, before handing in this assignment i realized (for what it's worth) that there could have been a better way to implement this algorithm which would be much less memory-heavy. This algorithm would have taken in as input $3$ arrays; one for each diagonal and another for b. Sadly, I figured this out with not enough time to spare in actually coding it all the way through so i decided to simply hand it what I had!
+
+	\item, (c), (d): see pdf at bottom for output. \\
+	
+	It is worth it to note that Xnp is much larger in questions (c) and (d) than in (b). This is because in GENP, the algorithm is dividing many large numbers by a very small one which introduces a lot of error. This error is introduced because of the limitations of floating point numbers. This also then introduced a small error in computing the solution matrix in (c) and (d). 
+The error for GEPP is quite consistently very small. 
+		
+	\begin{verbatim}
+	function testscript()
+
+n=9;
+diagonal1 = randn(1, 2*n+1);
+diagonal2 = randn(1, 2*n+1);
+
+matrix1 = zeros(2*n+1, 2*n+1);
+matrix1=diag(diagonal1);
+A=fliplr(matrix1);
+A=A+diag(diagonal2); % Random A is done
+b=zeros(2*n+1,1);
+
+midpt=n+1;
+%since x = one's, we wnat to add all the horizontal entries in Ai into bi
+
+for i=1:2*n+1
+    if i==midpt
+        b(i,1)=A(i,i);
+    else
+        b(i,1)=A(i,i)+A(i,2*n+2-i);
+    end
+end
+% at this point we have A and b such that the solution to Ax=b is a matrix of ones
+
+%%now well test my genp and gepp programs
+
+Xnp=genp(A,b); 
+Xpp=gepp(A,b); 
+x=ones(2*n+1,1);
+epsilon=eps*cond(A,2); % this calculates epsilon*norm(A)*norm(A^-1)
+
+disp("-----------------------------------------------------------------")
+XnpErr = (norm((x-Xnp),2))/(norm(x,2)); %errors for GEPP and GENP
+XppErr = (norm((x-Xpp),2))/(norm(x,2)); % these should be 0 but aren't due 
+%to discretization error of the computer!
+
+disp("Data: ")
+disp(" A= ")
+disp(A)
+disp("b = ")
+disp(b)
+
+disp("Result for ")
+disp("     GENP      GEPP")
+disp([Xnp, Xpp])
+
+disp("Error in Xnp= "+ XnpErr)
+disp("Error in Xpp= "+ XppErr)
+disp("Epsilon*||A||*||A^1||= "+epsilon)
+
+disp("")
+disp("*****************************************************************")
+disp("")
+
+disp("Question 2.c)")
+
+A(1,1)=10e-15;
+b(1,1)=A(1,1)+A(1,2*n+2-1); %% made the changes required by the question
+
+disp("Data: ")
+disp(" A= ")
+disp(A)
+disp("b = ")
+disp(b)
+
+Xnp=genp(A,b);  %%now we calculate and print everything as before
+Xpp=gepp(A,b); 
+epsilon=eps*cond(A,2); 
+XnpErr = (norm((x-Xnp),2))/(norm(x,2)); %errors for GEPP and GENP
+XppErr = (norm((x-Xpp),2))/(norm(x,2)); % these should be 0 but aren't due to 
+%discretization error of the computer!
+
+
+disp("Result for ")
+disp("     GENP      GEPP")
+disp([Xnp, Xpp])
+
+disp("Xnp error: "+ XnpErr)
+disp("Xpp error: "+ XppErr)
+disp("Epsilon*||A||*||A^1||= "+epsilon)
+
+disp("*****************************************************************") 
+
+disp("Question 2.d)")
+A(2*n+1,1)=10e-8;
+b(2*n+1,1)=A(2*n+1,1)+A(2*n+1,2*n+2-1); %% made the changes 
+%required by the question
+%now we calculate and print everything as before
+
+disp("Data: ")
+disp(" A= ")
+disp(A)
+disp("b = ")
+disp(b)
+
+Xnp=genp(A,b);  
+Xpp=gepp(A,b); 
+epsilon=eps*cond(A,2); 
+
+XnpErr = (norm((x-Xnp),2))/(norm(x,2)); %errors for GEPP and GENP
+XppErr = (norm((x-Xpp),2))/(norm(x,2)); % these should be 0 but aren't 
+%due to discretization error of the computer!
+
+disp("Result for ")
+disp("     GENP      GEPP")
+disp([Xnp, Xpp])
+disp("Xnp error: "+ XnpErr)
+disp("Xpp error: "+ XppErr)
+disp("Epsilon*||A||*||A^1||= "+epsilon)
+
+
+	\end{verbatim}
+	
+	\end{enumerate}
+	
+	
+
+\end{enumerate}
+
+\includepdf[pages=-6]{testscript.pdf}
+
+\end{document}
